@@ -1,0 +1,38 @@
+{% extends 'edu_app/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    {% for object in object_list %}
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-white bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Раздел: {{ object.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>{{ object.description }}</li>
+                        <li>{{ object.preview }}</li>
+                        <li>Дата публикации: {{ object.created | date:"d/m/Y" }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+{% else %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <p class="fs-5 text-muted">Для просмотра сайта требуется авторизация или регистрация</p>
+    </div>
+</header>
+
+{% endif %}
+
+{% endblock %}
